@@ -1,0 +1,46 @@
+buildscript {
+	ext {
+		kotlinVersion = '1.0.3'
+		springBootVersion = '1.4.0.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:${kotlinVersion}")
+	}
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'spring-boot'
+
+jar {
+	baseName = 'demo'
+	version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+	compile('org.springframework.cloud:spring-cloud-starter-feign')
+	compile('org.springframework.cloud:spring-cloud-security')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
+	compile("org.jetbrains.kotlin:kotlin-stdlib:${kotlinVersion}")
+	compile('com.fasterxml.jackson.module:jackson-module-kotlin:2.7.5')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:Brixton.SR5"
+	}
+}

@@ -1,0 +1,10 @@
+kevin:
+  url: https://api2.helpscout.net
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 10000
